@@ -1,4 +1,5 @@
-Quickly set up your own jumpbox in AWS. Installs my [dotfiles](https://github.com/relaxdiego/dotfiles) too!
+Jumpstarts a cluster
+
 
 Prerequisites
 =============
