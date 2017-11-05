@@ -1,15 +1,34 @@
 #!/usr/bin/env bash
 set -e
 
+config_dir=$(pwd)/$1
+
 script_path=$(dirname "${BASH_SOURCE[0]}")
 source $script_path/common > /dev/null
 
 cd $provisioner_dir/aws
 
-terraform apply
-IP=$(terraform output IP)
+terraform apply \
+    -var-file=$config_dir/terraform.tfvars \
+    -state=$config_dir/terraform.tfstate
+
+machine_ip=$(terraform output -state=$config_dir/terraform.tfstate IP)
+
+cat <<EOF >$config_dir/hosts.yml
+all:
+  hosts:
+    $machine_ip
+  children:
+    jumpbox:
+      hosts:
+        ${machine_ip}:
+EOF
 
 cd $approot
-$script_dir/configure
+$script_dir/configure $1
 
-echo "Your jumpbox is ready at ${IP}"
+echo ""
+echo "==="
+echo ""
+echo "Your jumpstarter is ready at ${machine_ip}"
+echo ""

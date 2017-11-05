@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 set -e
 
+config_dir=$(pwd)/$1
+
 script_path=$(dirname "${BASH_SOURCE[0]}")
 source $script_path/common > /dev/null
 
 cd $provisioner_dir/aws
 
-ip=$(terraform output IP)
-ssh $ip
+machine_ip=$(terraform output -state=$config_dir/terraform.tfstate IP)
+ssh $machine_ip
