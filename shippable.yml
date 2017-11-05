@@ -1,0 +1,21 @@
+branches:
+  only:
+  - master
+
+jobs:
+- name: Build Stage
+
+  job_type: runCI
+
+  steps:
+  - TASK:
+      - script: script/build
+
+  on_success:
+  - script: echo "SUCCESS"
+
+  on_failure:
+  - script: echo "FAILED"
+
+  always:
+  - script: pwd
