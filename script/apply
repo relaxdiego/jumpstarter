@@ -17,7 +17,7 @@ machine_ip=$(terraform output -state=$config_dir/terraform.tfstate IP)
 cat <<EOF >$config_dir/hosts.yml
 all:
   hosts:
-    $machine_ip
+    $machine_ip:
   children:
     jumpbox:
       hosts:

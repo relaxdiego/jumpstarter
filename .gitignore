@@ -29,4 +29,4 @@ pubkeys/*.*
 !pubkeys/.gitkeep
 pubkeys/remove/*.*
 !pubkeys/remove/.gitkeep
-terraform.tfvars
+provisioner/**/terraform.tfvars
