@@ -36,6 +36,7 @@
   file:
     path: /tmp/dotfiles-install.log
     state: touch
+  changed_when: false
 
 - name: Check if dotfiles already installed
   become: true
@@ -62,6 +63,7 @@
   file:
     path: ~/.dotfiles-installed
     state: touch
+  changed_when: false
 
 - name: Prepare run_once script for each user
   become: true
