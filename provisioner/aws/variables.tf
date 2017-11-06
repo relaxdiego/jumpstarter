@@ -1,9 +1,9 @@
 variable "owner" {
-    description = "Owner of this jumpbox"
+    description = "Owner of this jumpstarter"
 }
 
 variable "aws_instance_iam_profile" {
-    description = "The IAM profile to use for the jumpbox"
+    description = "The IAM profile to use for the jumpstarter"
 }
 
 variable "aws_profile" {
@@ -19,16 +19,16 @@ variable "aws_zone" {
 }
 
 variable "aws_vpc_security_group_id" {
-    description = "The AWS security group to use for the jumpbox"
+    description = "The AWS security group to use for the jumpstarter"
 }
 
 variable "aws_vpc_subnet_id" {
-    description = "The subnet to place the jumpbox in"
+    description = "The subnet to place the jumpstarter in"
 }
 
 variable "aws_instance_source_dest_check" {
     default     = "false"
-    description = "Whether to enable source destination checking for the jumpbox"
+    description = "Whether to enable source destination checking for the jumpstarter"
 }
 
 variable aws_instance_type {

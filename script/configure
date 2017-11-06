@@ -8,4 +8,4 @@ source $script_path/common > /dev/null
 
 cd $configurator_dir
 
-ansible-playbook --inventory="${config_dir}/hosts.yml" --extra-vars="ansible_user=ubuntu" jumpbox.yaml
+ansible-playbook --inventory="${config_dir}/hosts.yml" --extra-vars="ansible_user=ubuntu" jumpstarter.yml

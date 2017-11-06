@@ -1,5 +1,5 @@
-resource "aws_key_pair" "jumpbox" {
-    key_name   = "id_jumpbox_${var.owner}"
+resource "aws_key_pair" "jumpstarter" {
+    key_name   = "id_jumpstarter_${var.owner}"
     public_key = "${file("~/.ssh/id_rsa.pub")}"
 }
 
@@ -9,7 +9,7 @@ data "aws_region" "current" {
 }
 
 
-resource "aws_instance" "jumpbox" {
+resource "aws_instance" "jumpstarter" {
     ami = "${lookup(var.amis, data.aws_region.current.name)}"
     instance_type = "${var.aws_instance_type}"
 
@@ -22,28 +22,28 @@ resource "aws_instance" "jumpbox" {
     associate_public_ip_address = true
 
     availability_zone = "${var.aws_zone}"
-    key_name = "${aws_key_pair.jumpbox.key_name}"
+    key_name = "${aws_key_pair.jumpstarter.key_name}"
 
     tags {
-      Name = "jumpbox_${var.owner}"
-      NodeType = "jumpbox"
+      Name = "jumpstarter_${var.owner}"
+      NodeType = "jumpstarter"
       Owner = "${var.owner}"
     }
 }
 
 
 output "Name" {
-    value = "${aws_instance.jumpbox.tags["Name"]}"
+    value = "${aws_instance.jumpstarter.tags["Name"]}"
 }
 
 
 output "NodeType" {
-    value = "${aws_instance.jumpbox.tags["NodeType"]}"
+    value = "${aws_instance.jumpstarter.tags["NodeType"]}"
 }
 
 
 output "Owner" {
-    value = "${aws_instance.jumpbox.tags["Owner"]}"
+    value = "${aws_instance.jumpstarter.tags["Owner"]}"
 }
 
 output "AwsRegion" {
@@ -55,5 +55,5 @@ output "AwsProfile" {
 }
 
 output "IP" {
-    value = "${aws_instance.jumpbox.public_ip}"
+    value = "${aws_instance.jumpstarter.public_ip}"
 }
