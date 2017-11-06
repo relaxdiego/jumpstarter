@@ -3,9 +3,6 @@
   gather_facts: false
 
   tasks:
-    - wait_for_connection:
-        connect_timeout: 5
-
     # The following task is just to ensure our Python bootstrapper doesn't
     # fail. The real apt-get cache with cache validity timeout appears
     # further down this playbook.
