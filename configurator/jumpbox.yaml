@@ -3,14 +3,8 @@
   gather_facts: false
 
   tasks:
-    - name: Wait until SSH is available
-      local_action: 
-        module: wait_for 
-        host: "{{ ansible_ssh_host }}"
-        port: 22
-        state: started
-      retries: 30
-      delay: 10
+    - wait_for_connection:
+        connect_timeout: 5
 
     # The following task is just to ensure our Python bootstrapper doesn't
     # fail. The real apt-get cache with cache validity timeout appears
