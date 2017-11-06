@@ -15,7 +15,7 @@
 
 - name: "Add user with passwordless sudo permissions"
   become: true
-  with_fileglob: ../pubkeys/id_*.pub
+  with_fileglob: "{{inventory_dir}}/pubkeys/admin/*.keys"
   user:
     name: "{{item | key_username}}"
     groups: wheel
@@ -26,21 +26,21 @@
 
 - name: "Add users' public key to authorized_keys"
   become: true
-  with_fileglob: ../pubkeys/id_*.pub
+  with_fileglob: "{{inventory_dir}}/pubkeys/admin/*.keys"
   authorized_key:
     user: "{{item | key_username}}"
     key:  "{{lookup('file', item)}}"
 
 - name: "Logout unwanted users"
   become: true
-  with_fileglob: ../pubkeys/remove/id_*.pub
+  with_fileglob: "{{inventory_dir}}/pubkeys/remove/*.keys"
   command: /usr/bin/pkill -u {{item | key_username}}
   failed_when: false
   changed_when: false
 
 - name: "Remove unwanted user from hosts"
   become: true
-  with_fileglob: ../pubkeys/remove/id_*.pub
+  with_fileglob: "{{inventory_dir}}/pubkeys/remove/*.keys"
   user:
     name: "{{item | key_username}}"
     state: absent

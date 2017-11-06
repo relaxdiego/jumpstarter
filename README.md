@@ -27,8 +27,8 @@ Steps
 Adding More Users
 =================
 
-1. Copy the new user's public key to `pubkeys/` with the filename pattern
-   `id_<username>.pub`
+1. Copy the new user's public key to `<sitedef>/pubkeys/admin` with the
+   filename pattern `<username>.keys`
 
 2. Run `script/configure`. Ansible will then create a user with <username> 
    as the username and add the public key to that user's `~/.ssh/authorized_keys`.
@@ -39,6 +39,7 @@ Adding More Users
 Removing Users
 ==============
 
-1. Move the user's public key from `pubkeys/` to `pubkeys/remove/`
+1. Move the user's public key from `<sitedef>/pubkeys/admin` to
+   `<sitedef>/pubkeys/remove`
 
 2. Run `script/configure`

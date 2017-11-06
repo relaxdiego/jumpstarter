@@ -65,7 +65,7 @@
 
 - name: Prepare run_once script for each user
   become: true
-  with_fileglob: ../pubkeys/id_*.pub
+  with_fileglob: "{{inventory_dir}}/pubkeys/admin/*.keys"
   template:
     force: yes
     src: run_once.sh
@@ -75,14 +75,14 @@
 
 - name: Install run_once script for each user
   become: true
-  with_fileglob: ../pubkeys/id_*.pub
+  with_fileglob: "{{inventory_dir}}/pubkeys/admin/*.keys"
   lineinfile:
     dest: /home/{{item | key_username}}/.bashrc
     line: "~/.dotfiles_run_once.sh"
 
 - name: Set EDITOR env var for each user
   become: true
-  with_fileglob: ../pubkeys/id_*.pub
+  with_fileglob: "{{inventory_dir}}/pubkeys/admin/*.keys"
   lineinfile:
     dest: /home/{{item | key_username}}/.bashrc
     line: "export EDITOR=vim"
