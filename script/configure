@@ -8,12 +8,4 @@ source $script_path/common > /dev/null
 
 cd $configurator_dir
 
-if [ -e "jumpbox.retry" ]; then
-    RETRY="--limit @jumpbox.retry"
-else
-    RETRY=""
-fi
-
-machine_ip=$(terraform output -state=$config_dir/terraform.tfstate IP)
-ansible-playbook $RETRY --inventory="${config_dir}/hosts.yml" --extra-vars="ansible_ssh_user=ubuntu" jumpbox.yaml
-rm -f *.retry
+ansible-playbook --inventory="${config_dir}/hosts.yml" --extra-vars="ansible_user=ubuntu" jumpbox.yaml
